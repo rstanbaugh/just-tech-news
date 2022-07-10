@@ -1,11 +1,9 @@
 async function loginFormHandler(event) {
-  console.log('log in button pressed');
   event.preventDefault();
 
   const email = document.querySelector('#email-login').value.trim();
   const password = document.querySelector('#password-login').value.trim();
 
-  console.log("email / pw: ", email, password)
   if (email && password) {
     const response = await fetch('/api/users/login', {
       method: 'post',
@@ -13,18 +11,16 @@ async function loginFormHandler(event) {
         email,
         password
       }),
-      headers: {'Content-Type': 'application/json'}
+      headers: { 'Content-Type': 'application/json' }
     });
 
-    // check the response status
     if (response.ok) {
-      console.log("LOGIN SUCCESS!!");
       document.location.replace('/');
     } else {
       alert(response.statusText);
     }
   }
-};
+}
 
 async function signupFormHandler(event) {
   event.preventDefault();
@@ -41,19 +37,17 @@ async function signupFormHandler(event) {
         email,
         password
       }),
-      headers: {'Content-Type': 'application/json'}
+      headers: { 'Content-Type': 'application/json' }
     });
 
-    // check the response status
     if (response.ok) {
-      console.log("CREATE USER SUCCESS!!");
-      console.log(response);
+      document.location.replace('/');
     } else {
       alert(response.statusText);
     }
   }
-};
-
+}
 
 document.querySelector('.login-form').addEventListener('submit', loginFormHandler);
+
 document.querySelector('.signup-form').addEventListener('submit', signupFormHandler);
