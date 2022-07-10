@@ -37,6 +37,7 @@ router.get('/', (req, res) => {
     });
 });
 
+// get one user
 router.get('/:id', (req, res) => {
   Post.findOne({
     where: {
@@ -69,6 +70,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
+// create post
 router.post('/', (req, res) => {
   // expects {title: 'Taskmaster goes public!', post_url: 'https://taskmaster.com/press', user_id: 1}
   Post.create({
@@ -83,7 +85,9 @@ router.post('/', (req, res) => {
     });
 });
 
+// upvote
 router.put('/upvote', (req, res) => {
+  console.log("============ UPVOTE ROUTE ===========")
   // custom static method created in models/Post.js
   Post.upvote(req.body, { Vote })
     .then(updatedPostData => res.json(updatedPostData))
@@ -93,6 +97,7 @@ router.put('/upvote', (req, res) => {
     });
 });
 
+// modify Post
 router.put('/:id', (req, res) => {
   Post.update(
     {
@@ -117,6 +122,7 @@ router.put('/:id', (req, res) => {
     });
 });
 
+// delete post
 router.delete('/:id', (req, res) => {
   Post.destroy({
     where: {
